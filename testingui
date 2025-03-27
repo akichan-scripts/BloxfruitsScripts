@@ -1,0 +1,66 @@
+-- Load UI Library (Make sure to replace with an actual UI library if needed)
+local Library = loadstring(game:HttpGet("https://pastebin.com/raw/ui_library_url_here"))()
+local Window = Library:CreateWindow("Redz Hub : Blox Fruits")
+
+-- Create Main Tabs
+local FarmTab = Window:CreateTab("Farm")
+local QuestTab = Window:CreateTab("Quests/Items")
+local RaidTab = Window:CreateTab("Fruit/Raid")
+local StatsTab = Window:CreateTab("Stats")
+local TeleportTab = Window:CreateTab("Teleport")
+local StatusTab = Window:CreateTab("Status")
+local VisualTab = Window:CreateTab("Visual")
+local ShopTab = Window:CreateTab("Shop")
+local MiscTab = Window:CreateTab("Misc")
+
+-- Variables
+local AutoFarm = false
+local AutoChest = false
+local AutoKillBoss = false
+local SelectedBoss = "Dough King"
+
+-- Farm Tab
+FarmTab:CreateToggle("Auto Farm Level", function(value)
+    AutoFarm = value
+    while AutoFarm do
+        -- Auto Farm Logic
+        wait(1)
+    end
+end)
+
+FarmTab:CreateToggle("Auto Farm Nearest", function(value)
+    -- Auto Farm Nearest Mobs Logic
+end)
+
+-- Chest Tab
+MiscTab:CreateToggle("Auto Chest [Teleport]", function(value)
+    AutoChest = value
+    while AutoChest do
+        for _, chest in pairs(workspace:GetChildren()) do
+            if chest:IsA("Model") and chest:FindFirstChild("Chest") then
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = chest.CFrame
+                wait(0.5)
+            end
+        end
+        wait(2)
+    end
+end)
+
+-- Boss Tab
+MiscTab:CreateDropdown("Boss List", {"Dough King", "Rip Indra", "Cake Queen"}, function(selected)
+    SelectedBoss = selected
+end)
+
+MiscTab:CreateToggle("Auto Kill Boss Selected", function(value)
+    AutoKillBoss = value
+    while AutoKillBoss do
+        -- Auto Kill Boss Logic
+        wait(1)
+    end
+end)
+
+MiscTab:CreateToggle("Auto Farm All Bosses", function(value)
+    -- Auto Farm All Bosses Logic
+end)
+
+print("[INFO] Redz-Style UI Loaded Successfully!")
